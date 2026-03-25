@@ -20,11 +20,11 @@ const Kanban = {
     bindEvents() {
         document.querySelectorAll('.kanban-column').forEach(column => {
             const input = column.querySelector('.kanban-task-input');
-            const name = column.dataset.column;
+            const name = column.dataset.column || 'todo';
             
             input?.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    this.addTask(name, input.value);
+                    this.addTask('todo', input.value);
                     input.value = '';
                 }
             });
@@ -40,10 +40,10 @@ const Kanban = {
                 e.preventDefault();
                 zone.classList.remove('drag-over');
                 const target = zone.dataset.column;
-                if (target === 'inprogress' && this.tasks.inprogress.length >= this.WIP_LIMIT && this.sourceColumn !== 'inprogress') {
+                if (target === 'inprogress' && this.tasks.inprogress.length >= this.WIP_LIMIT && this.sourceColumn !== 'inprogress' && !this.tasks[target].find(t => t.id === this.draggedTaskId)) {
                     return;
                 }
-                if (this.draggedTaskId && this.sourceColumn && target !== this.sourceColumn) {
+                if (this.draggedTaskId && this.sourceColumn) {
                     this.moveTask(this.draggedTaskId, this.sourceColumn, target);
                 }
             });
@@ -52,7 +52,7 @@ const Kanban = {
 
     addTask(column, text) {
         text = text?.trim();
-        if (!text) return;
+        if (!text || column !== 'todo') return;
         
         if (column === 'inprogress' && this.tasks.inprogress.length >= this.WIP_LIMIT) return;
         

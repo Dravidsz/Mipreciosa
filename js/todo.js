@@ -23,17 +23,33 @@ const TodoList = {
 
     bindEvents() {
         this.elements.addBtn?.addEventListener('click', () => this.addTodo());
+        
         this.elements.input?.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.addTodo();
         });
+        
         this.elements.clearBtn?.addEventListener('click', () => this.clearCompleted());
         
+        // Usar event delegation en el contenedor de la lista
         this.elements.list?.addEventListener('click', (e) => {
             const item = e.target.closest('.todo-item');
             if (!item) return;
+            
             const id = item.dataset.id;
-            if (e.target.closest('.todo-checkbox')) this.toggleTodo(id);
-            else if (e.target.closest('.todo-delete')) this.deleteTodo(id);
+            
+            // Verificar si hizo clic en el checkbox
+            if (e.target.classList.contains('todo-checkbox') || 
+                e.target.closest('.todo-checkbox')) {
+                this.toggleTodo(id);
+                return;
+            }
+            
+            // Verificar si hizo clic en eliminar
+            if (e.target.classList.contains('todo-delete') || 
+                e.target.closest('.todo-delete')) {
+                this.deleteTodo(id);
+                return;
+            }
         });
     },
 
