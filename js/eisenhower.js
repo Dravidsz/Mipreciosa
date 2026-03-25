@@ -18,8 +18,7 @@ const Eisenhower = {
 
     bindEvents() {
         document.querySelectorAll('.matrix-quadrant').forEach(quadrant => {
-            const input = quadrant.querySelector('.quadrant-task-input');
-            const addBtn = quadrant.querySelector('.quadrant-add-btn');
+            const input = quadrant.querySelector('.quadrant-input');
             const name = quadrant.dataset.quadrant;
             
             // Enter key
@@ -28,6 +27,11 @@ const Eisenhower = {
                     this.addTask(name, input.value);
                     input.value = '';
                 }
+            });
+            
+            // Click en input para agregar
+            input?.addEventListener('input', (e) => {
+                // Opcional: mostrar botón de agregar
             });
         });
 

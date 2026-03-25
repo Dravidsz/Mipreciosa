@@ -70,10 +70,6 @@ const Storage = {
         return this.save('background_prefs', prefs);
     },
 
-    save(key, value) {
-        return this.save(key, value);
-    },
-
     getLastSection() {
         return this.get('last_section', 'pomodoro');
     }
