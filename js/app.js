@@ -31,11 +31,6 @@ const App = {
                 this.showSection(section);
             });
         });
-
-        // Botón cambiar fondo
-        document.getElementById('change-bg-btn')?.addEventListener('click', () => {
-            Background.nextImage();
-        });
     },
 
     showSection(section) {

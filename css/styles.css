@@ -177,6 +177,26 @@ body {
     transform: scale(1.05);
 }
 
+/* Botón de fijar fondo - posicionado arriba del botón de cambiar */
+#lock-bg-btn {
+    bottom: 76px;
+}
+
+#lock-bg-btn.locked {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+#lock-bg-btn.locked:hover {
+    background: white;
+}
+
+.floating-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 /* ===== POMODORO ===== */
 .pomodoro-card {
     text-align: center;

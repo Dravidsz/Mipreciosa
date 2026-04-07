@@ -136,7 +136,7 @@ const Storage = {
     // ===== Preferencias =====
 
     getBackgroundPrefs() {
-        return this.get('background_prefs', { currentIndex: 0 });
+        return this.get('background_prefs', { currentIndex: 0, isLocked: false });
     },
 
     saveBackgroundPrefs(prefs) {
