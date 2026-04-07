@@ -2,7 +2,12 @@
  * Main Application
  */
 const App = {
+    themeButton: null,
+
     init() {
+        // Inicializar tema antes de todo
+        this.initTheme();
+        
         // Inicializar sesión y verificar si expiró
         const sessionStatus = Storage.initSession();
         
@@ -31,6 +36,40 @@ const App = {
                 this.showSection(section);
             });
         });
+        
+        // Botón de tema
+        this.themeButton = document.getElementById('theme-btn');
+        if (this.themeButton) {
+            this.themeButton.addEventListener('click', () => this.toggleTheme());
+        }
+    },
+
+    // ===== Tema =====
+    
+    initTheme() {
+        const theme = Storage.getTheme();
+        if (theme === 'pink') {
+            document.documentElement.classList.add('theme-pink');
+        }
+        this.updateThemeButton();
+    },
+
+    toggleTheme() {
+        const html = document.documentElement;
+        const isPink = html.classList.toggle('theme-pink');
+        Storage.saveTheme(isPink ? 'pink' : 'default');
+        this.updateThemeButton();
+    },
+
+    updateThemeButton() {
+        if (!this.themeButton) {
+            this.themeButton = document.getElementById('theme-btn');
+        }
+        if (!this.themeButton) return;
+        
+        const isPink = document.documentElement.classList.contains('theme-pink');
+        this.themeButton.classList.toggle('pink', isPink);
+        this.themeButton.title = isPink ? 'Cambiar a tema clásico' : 'Cambiar a tema rosado';
     },
 
     showSection(section) {

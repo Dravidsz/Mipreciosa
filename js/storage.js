@@ -145,6 +145,16 @@ const Storage = {
 
     getLastSection() {
         return this.get('last_section', 'pomodoro');
+    },
+
+    // ===== Tema =====
+
+    getTheme() {
+        return this.get('theme', 'default');
+    },
+
+    saveTheme(theme) {
+        return this.save('theme', theme);
     }
 };
 
